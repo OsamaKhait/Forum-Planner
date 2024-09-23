@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div>
+        <h2>Connectez-vous à votre compte</h2>
+
+        <form method="post">
+            {% if error %}
+                <div>
+                    <span>{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                </div>
+            {% endif %}
+
+            {% if app.user %}
+                <div>
+                    Vous êtes connecté en tant que {{ app.user.userIdentifier }},
+                    <a href="{{ path('app_logout') }}">Se déconnecter</a>.
+                </div>
+            {% endif %}
+
+            <div>
+                <label for="username" class="sr-only">Email</label>
+                <input id="username" name="_username" type="email" value="{{ last_username }}" autocomplete="email" required placeholder="Adresse e-mail">
+            </div>
+            <div>
+                <label for="password" class="sr-only">Mot de passe</label>
+                <input id="password" name="_password" type="password" autocomplete="current-password" required placeholder="Mot de passe">
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            {# Option pour "se souvenir de moi", décommenter si nécessaire #}
+            {#
+            <div>
+                <input id="remember_me" name="_remember_me" type="checkbox">
+                <label for="remember_me">
+                    Se souvenir de moi
+                </label>
+            </div>
+            #}
+
+            <div>
+                <button type="submit">
+                    Se connecter
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
