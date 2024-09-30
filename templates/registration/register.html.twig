@@ -3,11 +3,11 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <div>
-        <h2>Create an Account</h2>
+    <div class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Create an Account</h2>
 
         {% for flash_error in app.flashes('verify_email_error') %}
-            <div>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                 {{ flash_error }}
             </div>
         {% endfor %}
@@ -15,35 +15,35 @@
         {{ form_errors(registrationForm) }}
 
         {{ form_start(registrationForm) }}
-        <div>
-            {{ form_label(registrationForm.email, 'Email Address') }}
-            {{ form_widget(registrationForm.email) }}
+        <div class="mb-4">
+            {{ form_label(registrationForm.email, 'Email Address', {'label_attr': {'class': 'block text-gray-700'}}) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'}}) }}
             {{ form_errors(registrationForm.email) }}
         </div>
 
-        <div>
-            {{ form_label(registrationForm.plainPassword, 'Password') }}
-            {{ form_widget(registrationForm.plainPassword) }}
+        <div class="mb-4">
+            {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'block text-gray-700'}}) }}
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'}}) }}
             {{ form_errors(registrationForm.plainPassword) }}
         </div>
 
-        <div>
-            {{ form_widget(registrationForm.agreeTerms) }}
-            <label for="agreeTerms">
-                I agree to the terms and conditions
-            </label>
+        <div class="mb-6">
+            <div class="flex items-center">
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'mr-2'}}) }}
+                <label for="agreeTerms" class="text-gray-700">I agree to the terms and conditions</label>
+            </div>
             {{ form_errors(registrationForm.agreeTerms) }}
         </div>
 
         <div>
-            <button type="submit">
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">
                 Register
             </button>
         </div>
         {{ form_end(registrationForm) }}
 
-        <div>
-            <a href="{{ path('app_login') }}">
+        <div class="mt-4 text-center">
+            <a href="{{ path('app_login') }}" class="text-indigo-600 hover:underline">
                 Already have an account? Sign in
             </a>
         </div>

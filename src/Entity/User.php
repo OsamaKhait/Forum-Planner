@@ -60,6 +60,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\ManyToMany(targetEntity: Team::class, inversedBy: 'members')]
     private Collection $teams;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->forums = new ArrayCollection();
@@ -252,6 +255,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function removeTeam(Team $team): static
     {
         $this->teams->removeElement($team);
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }

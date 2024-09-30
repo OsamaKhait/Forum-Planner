@@ -1,55 +1,9 @@
-{% extends 'base.html.twig' %}
+<h1>Mon Profil</h1>
 
-{% block title %}Mon Profil{% endblock %}
-
-{% block body %}
-<div>
-    <h1>Mon Profil</h1>
-
-    {% for message in app.flashes('success') %}
-        <div>
-            <p>{{ message }}</p>
-        </div>
-    {% endfor %}
-
-    {% for message in app.flashes('error') %}
-        <div>
-            <p>{{ message }}</p>
-        </div>
-    {% endfor %}
-
-    <h2>Changer de mot de passe</h2>
-    <form method="post">
-        <input type="hidden" name="password_form" value="1">
-
-        <div>
-            <label for="new_password">Nouveau mot de passe</label>
-            <input type="password" id="new_password" name="new_password" required>
-        </div>
-
-        <div>
-            <label for="confirm_password">Confirmer le mot de passe</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
-        </div>
-
-        <button type="submit">
-            Mettre à jour le mot de passe
-        </button>
-    </form>
-
-    <hr>
-
-    <h2>Authentification à deux facteurs (2FA)</h2>
-
-    {% if is2faEnabled %}
-    <p>2FA est actuellement <strong>activée</strong>.</p>
-    <img src="{{ qrCodeUrl }}" alt="QR Code">
-
-    <form method="post">
-        <input type="hidden" name="2fa_form" value="1">
-        <button type="submit">
-            Désactiver 2FA
-        </button>
-    </form>
-    {% else %}
-    <p>2FA e
+{% if app.user.twoFactorEnabled %}
+    <p>La vérification en deux étapes est activée sur votre compte.</p>
+    <a href="{{ path('app_2fa_disable') }}" class="btn btn-danger">Désactiver 2FA</a>
+{% else %}
+    <p>La vérification en deux étapes n'est pas activée sur votre compte.</p>
+    <a href="{{ path('app_2fa_setup') }}" class="btn btn-success">Activer 2FA</a>
+{% endif %}

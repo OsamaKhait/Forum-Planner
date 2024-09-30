@@ -1,11 +1,19 @@
-<h1>Hi! Please confirm your email!</h1>
+<div class="max-w-xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold text-gray-800 mb-4">Hi! Please confirm your email!</h1>
 
-<p>
-    Please confirm your email address by clicking the following link:<br><br>
-    <a href="{{ signedUrl|raw }}">Confirm my Email</a>.
-    This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
-</p>
+    <p class="text-gray-700 text-lg mb-6">
+        Please confirm your email address by clicking the following link:
+    </p>
 
-<p>
-    Cheers!
-</p>
+    <a href="{{ signedUrl|raw }}" class="inline-block bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition duration-300">
+        Confirm my Email
+    </a>
+
+    <p class="text-gray-600 mt-4">
+        This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+    </p>
+
+    <p class="text-gray-700 mt-6">
+        Cheers!
+    </p>
+</div>

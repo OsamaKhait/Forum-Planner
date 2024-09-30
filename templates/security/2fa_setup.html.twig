@@ -1,31 +1,16 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Configurer 2FA{% endblock %}
-
-{% block body %}
-    <div>
-        <h1>Connectez vous grâce à l'A2F</h1>
-
-        {% for message in app.flashes('success') %}
-            <div>{{ message }}</div>
-        {% endfor %}
-
-        {% for message in app.flashes('error') %}
-            <div>{{ message }}</div>
-        {% endfor %}
-
-        <form method="POST" action="{{ path('2fa_login_check') }}">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            <div>
-                <label for="auth_code">Entrez le code de vérification</label>
-                <input type="text" name="auth_code" id="auth_code" autocomplete="one-time-code" autofocus required>
-            </div>
-
-            <div>
-                <button type="submit" value="Login">
-                    Activer 2FA
-                </button>
-            </div>
-        </form>
-    </div>
-{% endblock %}
+{#<h1>Activer la vérification en deux étapes</h1>#}
+{#<div style="display: flex; justify-content: space-between; align-items: flex-start;">#}
+{#    <div>#}
+{#        <p>Scannez ce QR code avec votre application Google Authenticator :</p>#}
+{#        <img src="{{ qrCodeUrl }}" alt="QR Code pour Google Authenticator">  #}{# Use qrCodeUrl instead of qrCodeUri #}
+{#    </div>#}
+{#    <div style="margin-left: 20px;">#}
+{#        <form method="post">#}
+{#            <div>#}
+{#                <label for="auth_code">Entrez le code de vérification (6 chiffres) :</label>#}
+{#                <input type="text" id="auth_code" name="auth_code" required>#}
+{#            </div>#}
+{#            <button type="submit" class="btn btn-success">Vérifier et Activer 2FA</button>#}
+{#        </form>#}
+{#    </div>#}
+{#</div>#}
