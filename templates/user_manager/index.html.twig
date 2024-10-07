@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User List{% endblock %}
+
+{% block javascripts %}
+    {% block importmap %}
+        {{ importmap(['app', 'user-filter']) }}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+    <div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">User List</h2>
+
+        <div class="mb-4">
+            <input type="text" id="search" placeholder="Search users..."
+                   class="border border-gray-300 p-2 rounded w-full">
+        </div>
+
+        <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+            <tr>
+                <th class="py-2 px-4 border-b">Email</th>
+                <th class="py-2 px-4 border-b">Nom</th>
+                <th class="py-2 px-4 border-b">Role Actuel</th>
+                <th class="py-2 px-4 border-b">Actions</th>
+            </tr>
+            </thead>
+            <tbody id="userTable">
+            {% for user in users %}
+                <tr class="hover:bg-gray-100" data-email="{{ user.email }}">
+                    <td class="py-2 px-4 border-b">{{ user.email }}</td>
+                    <td class="py-2 px-4 border-b">{{ user.name }}</td>
+                    <td class="py-2 px-4 border-b">{{ user.roles|join(', ') }}</td>
+                    <td class="py-2 px-4 border-b">
+                        <a href="{{ path('app_admin_edit_user_role', { id: user.id }) }}"
+                           class="text-indigo-600 hover:underline">Edit Role</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
