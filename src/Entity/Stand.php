@@ -19,9 +19,6 @@ class Stand
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $picture;
-
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
@@ -40,9 +37,16 @@ class Stand
     #[ORM\OneToMany(targetEntity: Timeslot::class, mappedBy: 'stand')]
     private Collection $timeSlots;
 
+    /**
+     * @var Collection<int, Evaluation>
+     */
+    #[ORM\OneToMany(targetEntity: Evaluation::class, mappedBy: 'stand')]
+    private Collection $evaluations;
+
     public function __construct()
     {
         $this->timeSlots = new ArrayCollection();
+        $this->evaluations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -58,18 +62,6 @@ class Stand
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    public function setPicture($picture): static
-    {
-        $this->picture = $picture;
 
         return $this;
     }
@@ -146,6 +138,36 @@ class Stand
             // set the owning side to null (unless already changed)
             if ($timeSlot->getStand() === $this) {
                 $timeSlot->setStand(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Evaluation>
+     */
+    public function getEvaluations(): Collection
+    {
+        return $this->evaluations;
+    }
+
+    public function addEvaluation(Evaluation $evaluation): static
+    {
+        if (!$this->evaluations->contains($evaluation)) {
+            $this->evaluations->add($evaluation);
+            $evaluation->setStand($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvaluation(Evaluation $evaluation): static
+    {
+        if ($this->evaluations->removeElement($evaluation)) {
+            // set the owning side to null (unless already changed)
+            if ($evaluation->getStand() === $this) {
+                $evaluation->setStand(null);
             }
         }
 

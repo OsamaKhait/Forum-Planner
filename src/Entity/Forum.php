@@ -22,9 +22,6 @@ class Forum
     #[ORM\Column(length: 100)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $picture = null;
-
     #[ORM\Column(length: 300)]
     private ?string $description = null;
 
@@ -67,18 +64,6 @@ class Forum
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    public function setPicture($picture): static
-    {
-        $this->picture = $picture;
 
         return $this;
     }

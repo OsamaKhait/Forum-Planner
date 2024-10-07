@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum index{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Forum Index</h1>
+
+        <table class="min-w-full bg-white shadow-md rounded-lg">
+            <thead class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+            <tr>
+                <th class="py-3 px-6 text-left">Id</th>
+                <th class="py-3 px-6 text-left">Title</th>
+                <th class="py-3 px-6 text-left">Description</th>
+                <th class="py-3 px-6 text-left">Location</th>
+                <th class="py-3 px-6 text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-light">
+            {% for forum in forums %}
+                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                    <td class="py-3 px-6 text-left whitespace-nowrap">{{ forum.id }}</td>
+                    <td class="py-3 px-6 text-left">{{ forum.title }}</td>
+                    <td class="py-3 px-6 text-left">{{ forum.description }}</td>
+                    <td class="py-3 px-6 text-left">{{ forum.location }}</td>
+                    <td class="py-3 px-6 text-center">
+                        <a href="{{ path('app_forum_show', {'id': forum.id}) }}" class="text-blue-600 hover:text-blue-800 font-medium">Show</a>
+                        <a href="{{ path('app_forum_edit', {'id': forum.id}) }}" class="ml-4 text-green-600 hover:text-green-800 font-medium">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="py-4 px-6 text-center text-gray-500">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="mt-6">
+            <a href="{{ path('app_forum_new') }}" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+                Create New
+            </a>
+        </div>
+    </div>
+{% endblock %}

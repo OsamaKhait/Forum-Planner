@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stand Details{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+        <div class="bg-white shadow-xl rounded-lg w-full max-w-2xl p-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Stand Details</h1>
+
+            <table class="min-w-full border-collapse">
+                <tbody>
+                <tr>
+                    <th class="text-left py-2 px-4 border-b">Id</th>
+                    <td class="py-2 px-4 border-b">{{ stand.id }}</td>
+                </tr>
+                <tr>
+                    <th class="text-left py-2 px-4 border-b">Title</th>
+                    <td class="py-2 px-4 border-b">{{ stand.title }}</td>
+                </tr>
+                <tr>
+                    <th class="text-left py-2 px-4 border-b">Description</th>
+                    <td class="py-2 px-4 border-b">{{ stand.description }}</td>
+                </tr>
+                <tr>
+                    <th class="text-left py-2 px-4 border-b">Capacity</th>
+                    <td class="py-2 px-4 border-b">{{ stand.capacity }}</td>
+                </tr>
+                <tr>
+                    <th class="text-left py-2 px-4 border-b">Duration</th>
+                    <td class="py-2 px-4 border-b">{{ stand.duration ? stand.duration|date('H:i:s') : '' }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="mt-6 text-center">
+                <a href="{{ path('app_stand_index') }}" class="text-blue-500 hover:text-blue-700 font-medium transition duration-300 ease-in-out">
+                    ← Back to List
+                </a>
+                <a href="{{ path('app_stand_edit', {'id': stand.id}) }}" class="text-green-500 hover:text-green-700 ml-4 font-medium transition duration-300 ease-in-out">
+                    Edit
+                </a>
+            </div>
+
+            <div class="mt-8">
+                {{ include('stand/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
