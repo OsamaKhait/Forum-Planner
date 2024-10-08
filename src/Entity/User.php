@@ -61,7 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private Collection $teams;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
     public function __construct()
     {
